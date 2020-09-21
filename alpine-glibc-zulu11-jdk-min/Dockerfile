@@ -1,7 +1,7 @@
-FROM jprante/alpine-glibc-zulu11-jdk AS packager
+FROM fl.hbz-nrw.de/jprante/alpine-glibc-zulu11-jdk AS packager
 
 RUN jlink \
-    --module-path /usr/lib/jvm/zulu11.31.11-ca-jdk11.0.3-linux_x64/jmods \
+    --module-path /usr/lib/jvm/zulu11.41.23-ca-jdk11.0.8-linux_x64/jmods \
     --verbose \
     --add-modules java.base,java.xml,jdk.unsupported,java.sql,java.instrument,jdk.management,jdk.compiler \
     --output /usr/lib/jvm/zulu11-min \
@@ -9,7 +9,7 @@ RUN jlink \
     --no-header-files \
     --no-man-pages
 
-FROM jprante/alpine-glibc
+FROM fl.hbz-nrw.de/jprante/alpine-glibc
 
 COPY --from=packager /usr/lib/jvm/zulu11-min /usr/lib/jvm/zulu11-min
 
